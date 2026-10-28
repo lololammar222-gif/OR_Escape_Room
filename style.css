@@ -26,9 +26,16 @@ body {
 
 /* الشخصية الكرتونية */
 .character-box {
-    font-size: 60px;
-    margin-bottom: 10px;
-    animation: bounce 2s infinite;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.character-img {
+    max-width: 150px; /* تحكم في حجم الصورة من هنا */
+    height: auto;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); /* ظل خفيف */
+    animation: bounce 2s infinite; /* حركة الشخصية */
 }
 
 @keyframes bounce {
