@@ -353,7 +353,10 @@ function setupUnlock(result) {
 
     button.addEventListener("click", () => {
       if (input.value.trim() === code) {
-        status.textContent = "تم فتح القفل بنجاح! 🎉🔓";
+        status.textContent = " 🔓 تم فتح القفل بنجاح🎉🔥
+
+عاش يا بطل🧡👏🏻
+ قدرت توصل للنهاية وتعدّي التحدي، وده في حد ذاته إنجاز افتكر دايمًا إن كل تحدي بتخوضه فرصة تتعلم وتثبت إنك تقدر تكون أحسن 💪🏻✨";
         status.style.color = "#4ade80";
         input.disabled = true;
         button.disabled = true;
