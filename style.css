@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap');
-
 body {
-    font-family: 'Cairo', sans-serif;
-    background: #111827; /* خلفية الغرفة الأساسية */
-    color: #fff;
+    font-family: 'Arial', sans-serif;
+    background-color: #004d99; /* أزرق داكن */
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,91 +11,40 @@ body {
 }
 
 .game-container {
-    background: #1f2937;
+    background-color: #ffffff; /* أبيض */
+    color: #00264d; /* كحلي */
     padding: 30px;
-    border-radius: 24px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     max-width: 550px;
     width: 100%;
     text-align: center;
-    border: 3px solid #3b82f6;
-    position: relative;
-    overflow: hidden; /* عشان الحركة متطلعش برا */
-}
-
-/* تعديل الشخصية الكرتونية (الخدعة لإزالة الخلفية) */
-.character-box {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
-
-.character-img {
-    max-width: 150px;
-    height: auto;
-    
-    /* الخدعة: دمج الألوان لإزالة الخلفية */
-    mix-blend-mode: color-burn; 
-    filter: contrast(110%) brightness(110%);
-    opacity: 0.9;
-    
-    /* حركة الشخصية المريحة */
-    animation: gentle-move 6s ease-in-out infinite;
-}
-
-@keyframes gentle-move {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px) rotate(1deg); }
-}
-
-/* شريط التقدم */
-.progress-header {
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #9ca3af;
-}
-
-.progress-bar-bg {
-    background: #374151;
-    height: 12px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 6px;
-}
-
-.progress-bar-fill {
-    background: #10b981;
-    height: 100%;
-    width: 10%;
-    transition: width 0.4s ease;
+    border: 3px solid #ff8c00; /* برتقالي */
 }
 
 h1, h2 {
-    color: #f3f4f6;
-    margin-bottom: 15px;
+    color: #ff8c00; /* برتقالي */
+    margin-bottom: 20px;
 }
 
 #scenario-text {
-    font-size: 17px;
+    font-size: 18px;
     line-height: 1.6;
     margin-bottom: 25px;
     text-align: right;
-    background: #111827;
-    padding: 15px;
-    border-radius: 12px;
+    color: #00264d;
 }
 
 input[type="text"] {
     width: 80%;
-    padding: 14px;
-    border-radius: 12px;
-    border: 2px solid #3b82f6;
-    background: #111827;
-    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #ff8c00;
     margin-bottom: 20px;
     font-size: 16px;
     text-align: center;
+    background-color: #f2f9ff;
+    color: #00264d;
 }
 
 .options-container {
@@ -107,77 +54,50 @@ input[type="text"] {
 }
 
 .btn {
+    background-color: #ff8c00; /* برتقالي */
+    color: #ffffff; /* أبيض */
     border: none;
-    padding: 14px 20px;
-    border-radius: 12px;
-    font-size: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: 'Cairo', sans-serif;
+    transition: all 0.3s ease;
 }
 
-.main-btn {
-    background: #3b82f6;
-    color: white;
-    width: 100%;
-}
-
-.main-btn:hover {
-    background: #2563eb;
-}
-
-.opt-btn {
-    background: #374151;
-    color: #f9fafb;
-    text-align: right;
-    border: 1px solid #4b5563;
-}
-
-.opt-btn:hover {
-    background: #4b5563;
-    border-color: #3b82f6;
+.btn:hover {
+    background-color: #e67e00;
 }
 
 .feedback {
     margin-top: 20px;
     font-weight: bold;
-    font-size: 16px;
     min-height: 30px;
 }
 
-/* الخزنة والكود */
-.safe-box {
-    background: #111827;
-    padding: 20px;
-    border-radius: 16px;
-    border: 2px dashed #f59e0b;
-    margin: 20px 0;
-}
-
 .secret-code {
+    display: block;
     font-size: 32px;
-    letter-spacing: 6px;
-    color: #f59e0b;
-    font-weight: bold;
-    margin-top: 10px;
+    letter-spacing: 8px;
+    color: #004d99;
+    margin: 15px 0;
 }
 
-.final-score {
-    font-size: 20px;
-    color: #10b981;
-    font-weight: bold;
-}
-
-.final-message {
-    font-size: 16px;
-    color: #d1d5db;
+/* تنسيق الصورة الشخصية */
+.character-box, .character-small-box {
     margin-bottom: 20px;
-    line-height: 1.6;
+    display: flex;
+    justify-content: center;
 }
 
-/* سطر مبني على */
-p {
-    margin: 5px 0;
-    white-space: nowrap; /* لجعل النص في سطر واحد */
+.character-img {
+    max-width: 180px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.character-small-img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 8px;
 }
