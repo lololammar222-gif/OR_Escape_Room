@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Cairo', sans-serif;
-    background: #111827;
+    background: #111827; /* خلفية الغرفة الأساسية */
     color: #fff;
     display: flex;
     justify-content: center;
@@ -22,25 +22,33 @@ body {
     text-align: center;
     border: 3px solid #3b82f6;
     position: relative;
+    overflow: hidden; /* عشان الحركة متطلعش برا */
 }
 
-/* الشخصية الكرتونية */
+/* تعديل الشخصية الكرتونية (الخدعة لإزالة الخلفية) */
 .character-box {
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
 .character-img {
-    max-width: 150px; /* تحكم في حجم الصورة من هنا */
+    max-width: 150px;
     height: auto;
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); /* ظل خفيف */
-    animation: bounce 2s infinite; /* حركة الشخصية */
+    
+    /* الخدعة: دمج الألوان لإزالة الخلفية */
+    mix-blend-mode: color-burn; 
+    filter: contrast(110%) brightness(110%);
+    opacity: 0.9;
+    
+    /* حركة الشخصية المريحة */
+    animation: gentle-move 6s ease-in-out infinite;
 }
 
-@keyframes bounce {
+@keyframes gentle-move {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-5px) rotate(1deg); }
 }
 
 /* شريط التقدم */
@@ -166,4 +174,10 @@ input[type="text"] {
     color: #d1d5db;
     margin-bottom: 20px;
     line-height: 1.6;
+}
+
+/* سطر مبني على */
+p {
+    margin: 5px 0;
+    white-space: nowrap; /* لجعل النص في سطر واحد */
 }
