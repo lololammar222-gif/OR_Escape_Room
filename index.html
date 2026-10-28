@@ -1,97 +1,71 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OR Escape Room</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الـ Escape Room - الإتيكيت والبروتوكول</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="background-overlay"></div>
-
-  <main class="game-container">
-
-    <header class="game-header">
-      <div class="logo">
-        <span class="key-icon">🗝️</span>
-        <div>
-          <h1>OR</h1>
-          <p>Escape Room</p>
+    <!-- شاشة البداية -->
+    <div class="game-container" id="start-screen">
+        <div class="character-box">
+            <span class="avatar">🕵️‍♂️</span>
         </div>
-      </div>
+        <h1>مرحباً بك في تحدي الـ Escape Room!</h1>
+        <p>ادخل اسمك واجمع أرقام الكود للهروب من الغرفة:</p>
+        <input type="text" id="player-name" placeholder="اكتب اسمك هنا...">
+        <button class="btn main-btn" onclick="startGame()">ابدأ المغامرة 🚀</button>
+    </div>
 
-      <div class="timer-box">
-        <span>⏱️ الوقت</span>
-        <strong id="timer">00:00</strong>
-      </div>
-    </header>
+    <!-- شاشة اللعبة -->
+    <div class="game-container" id="game-screen" style="display: none;">
+        
+        <!-- شريط التقدم العلوي -->
+        <div class="progress-header">
+            <span id="stage-counter">المحطة 1 من 10</span>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+        </div>
 
-    <section id="start-screen" class="panel">
-      <h2>مستعد للتحدي؟ 🔐</h2>
-      <p>عندك 10 تحديات. جاوب صح، اجمع الأرقام، وافتح الخزنة النهائية!</p>
+        <div class="character-box">
+            <span class="avatar" id="avatar-emoji">🧐</span>
+        </div>
 
-      <label for="player-name">اكتب اسمك</label>
-      <input id="player-name" type="text" placeholder="اسم اللاعب">
+        <h2 id="room-title"></h2>
+        <p id="scenario-text"></p>
 
-      <button id="start-btn">ابدأ المهمة 🚀</button>
-    </section>
+        <div class="options-container" id="options-container">
+            <button class="btn opt-btn" data-key="أ"></button>
+            <button class="btn opt-btn" data-key="ب"></button>
+            <button class="btn opt-btn" data-key="ج"></button>
+            <button class="btn opt-btn" data-key="د"></button>
+        </div>
 
-    <section id="quiz-screen" class="panel hidden">
-      <div class="progress-info">
-        <span id="question-number">السؤال 1 من 10</span>
-        <span id="score">النتيجة: 0</span>
-      </div>
+        <div id="feedback" class="feedback"></div>
+    </div>
 
-      <div class="progress-track">
-        <div id="progress-bar"></div>
-      </div>
+    <!-- شاشة الخزنة والنتيجة النهائية -->
+    <div class="game-container" id="safe-screen" style="display: none;">
+        <div class="character-box">
+            <span class="avatar" id="safe-avatar">🔓</span>
+        </div>
+        
+        <h2 id="safe-title">فتحت الخزنة!</h2>
+        
+        <div class="safe-box">
+            <p>الكود الخاص بك للهروب هو:</p>
+            <div class="secret-code" id="generated-code">--------</div>
+        </div>
 
-      <h2 id="question-text"></h2>
+        <p class="final-score" id="final-score-text"></p>
+        <p class="final-message" id="final-message-text"></p>
 
-      <div id="answers-container" class="answers"></div>
+        <button class="btn main-btn" onclick="location.reload()">إعادة اللعب 🔄</button>
+    </div>
 
-      <p id="feedback" aria-live="polite"></p>
-
-      <div id="secret-code" class="secret-code hidden">
-        🔑 الرقم السري: <strong id="earned-digit"></strong>
-      </div>
-
-      <button id="submit-btn">تحقق من الإجابة</button>
-      <button id="next-btn" class="hidden">السؤال التالي ←</button>
-    </section>
-
-    <section id="final-screen" class="panel hidden">
-      <h2 id="final-title">🎉 مبروك!</h2>
-      <p id="final-message"></p>
-
-      <div class="result-card">
-        <p>اللاعب: <strong id="final-name"></strong></p>
-        <p>السكور: <strong id="final-score"></strong></p>
-        <p>الوقت المستغرق: <strong id="final-time"></strong></p>
-      </div>
-
-      <h3>الأرقام السرية اللي جمعتها</h3>
-      <div id="collected-codes" class="codes-list"></div>
-
-      <label for="final-code">أدخل الكود النهائي</label>
-      <input id="final-code" type="text" inputmode="numeric"
-             maxlength="10" placeholder="10 أرقام">
-
-      <button id="unlock-btn">افتح الخزنة 🔓</button>
-      <p id="unlock-feedback" aria-live="polite"></p>
-
-      <button id="restart-btn">العب من جديد</button>
-    </section>
-
-    <footer>
-      <span>OR Escape Room</span>
-      <span>10 تحديات • مفتاح واحد 🗝️</span>
-    </footer>
-
-  </main>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
