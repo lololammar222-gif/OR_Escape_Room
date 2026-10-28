@@ -4,49 +4,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OR Escape Room</title>
+  <title>OR Escape Room | Save the Event</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="container">
-    <header>
-      <p class="tag">YLY • OR COMMITTEE</p>
-      <h1>OR ESCAPE ROOM</h1>
-      <h2>SAVE THE EVENT</h2>
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+
+  <main class="game-container">
+    <header class="topbar">
+      <span class="brand">YLY <span>OR</span></span>
+      <span class="tag">SPECIAL MISSION</span>
     </header>
 
-    <section id="startScreen" class="panel">
-      <h2>🚨 مهمتك بدأت!</h2>
-      <p>جاوب على 10 أسئلة واجمع أعلى سكور تقدر عليه.</p>
-      <label for="playerName">اكتب اسمك</label>
-      <input id="playerName" type="text" maxlength="60"
-        placeholder="اسمك هنا">
-      <button id="startBtn">START MISSION 🚀</button>
-      <p id="startError"></p>
+    <section id="startScreen" class="screen">
+     <div class="character">
+  <img src="image.png" alt="Character">
+</div>
+        <div class="alert">🚨 EMERGENCY ALERT</div>
+        <h1>OR <span>ESCAPE ROOM</span></h1>
+        <p class="subtitle">SAVE THE EVENT</p>
+        <p class="description">
+          قدامك مهمة مهمة! اختبر معلوماتك في الإتيكيت والبروتوكول،
+          جاوب على الأسئلة واجمع نقاطك علشان تنقذ الـ Event.
+        </p>
+      </div>
+
+      <div class="panel">
+        <label for="playerName">YOUR NAME</label>
+        <input id="playerName" type="text" placeholder="اكتب اسمك هنا..." maxlength="40">
+        <button id="startBtn" class="primary-btn">START MISSION 🚀</button>
+        <p class="small-note">10 QUESTIONS • ONE MISSION</p>
+      </div>
     </section>
 
-    <section id="gameScreen" class="panel hidden">
-      <div class="stats">
-        <span id="questionCount">السؤال 1 من 10</span>
-        <span id="score">السكور: 0/10</span>
+    <section id="quizScreen" class="screen hidden">
+      <div class="quiz-header">
+        <div>
+          <span class="eyebrow">YOUR MISSION</span>
+          <h2>PROTOCOL CHALLENGE</h2>
+        </div>
+        <div class="timer-box">
+          <span>TIME LEFT</span>
+          <strong id="timer">30:00</strong>
+        </div>
       </div>
-      <div class="progress">
+
+      <div class="progress-info">
+        <span id="questionCounter">QUESTION 1 / 10</span>
+        <span id="scoreLabel">SCORE: 0</span>
+      </div>
+      <div class="progress-track">
         <div id="progressBar"></div>
       </div>
-      <h2 id="questionTitle"></h2>
-      <div id="answers"></div>
-      <p id="feedback"></p>
-      <button id="nextBtn" disabled>السؤال التالي ←</button>
+
+      <article class="question-card">
+        <div class="question-number" id="questionNumber">01</div>
+        <h3 id="questionText"></h3>
+        <div id="answers" class="answers"></div>
+        <p id="feedback" class="feedback" aria-live="polite"></p>
+        <button id="nextBtn" class="primary-btn hidden">NEXT QUESTION ➜</button>
+      </article>
+      <p class="footer-note">OR DIVISION • CLASSIFIED MISSION 🔐</p>
     </section>
 
-    <section id="resultScreen" class="panel hidden">
-      <h2 id="resultTitle"></h2>
-      <p id="finalScore"></p>
-      <p id="resultMessage"></p>
-      <h3>YOUR SECRET CODE</h3>
-      <div id="secretCode"></div>
-      <button id="copyBtn">نسخ الكود 📋</button>
-      <p id="copyFeedback"></p>
+    <section id="resultScreen" class="screen hidden">
+      <div class="result-icon" id="resultIcon">🔐</div>
+      <p class="eyebrow">MISSION REPORT</p>
+      <h2 id="resultTitle">MISSION COMPLETE</h2>
+      <p id="resultMessage" class="description"></p>
+
+      <div class="result-stats">
+        <div>
+          <span>PLAYER</span>
+          <strong id="resultName"></strong>
+        </div>
+        <div>
+          <span>YOUR SCORE</span>
+          <strong id="finalScore">0 / 100</strong>
+        </div>
+        <div>
+          <span>CORRECT ANSWERS</span>
+          <strong id="correctCount">0 / 10</strong>
+        </div>
+      </div>
+
+      <div class="code-vault">
+        <p>🔓 YOUR SECRET CODE</p>
+        <strong id="secretCode" dir="ltr"></strong>
+        <button id="copyCodeBtn" class="secondary-btn">COPY CODE 📋</button>
+      </div>
+
+      <button id="restartBtn" class="primary-btn">PLAY AGAIN ↻</button>
+      <p class="footer-note">OR ESCAPE ROOM • SAVE THE EVENT</p>
     </section>
   </main>
 
