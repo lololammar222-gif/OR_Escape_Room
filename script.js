@@ -1,125 +1,293 @@
-const stages = [
-    { scenario: "ما هو الفرق الأساسي بين الإتيكيت والبروتوكول من حيث الإلزام؟", options: { "أ": "أ) الإتيكيت إلزامي والبروتوكول اختياري.", "ب": "ب) الإتيكيت قواعد السلوك والالتزام بها إلزامي...", "ج": "ج) الإتيكيت قواعد التعامل في المواقف الرسمية واتباعها مفضل ومخالفتها لا يترتب عليها ضرر، بينما البروتوكول قواعد السلوك واللباقة والالتزام به إلزامي.", "د": "د) كلاهما غير ملزم على الإطلاق." }, correct: "ج" },
-    { scenario: "أي مما يلي يُعد من لغة الجسد السلبية (Don't Do) أثناء التعامل الرسمي؟", options: { "أ": "أ) الوقوف بشكل مستقيم.", "ب": "ب) الحفاظ على تواصل بصري سليم.", "ج": "ج) تشبيك الذراعين بشكل دفاعي.", "د": "د) ابتسامة وتعبير وجه هادئ." }, correct: "ج" },
-    { scenario: "ما هي القاعدة الذهبية في التقديم والتعريف بالشخصيات؟", options: { "أ": "أ) يتم تقديم الشخص الأعلى رتبة إلى الشخص الأقل رتبة دائماً.", "ب": "ب) يتم تقديم الشخص 'الأقل رتبة' إلى الشخص 'الأعلى رتبة'، وليس العكس.", "ج": "ج) لا توجد قاعدة محددة للتقديم.", "د": "د) يتم تقديم الشخص حسب العمر بغض النظر عن الرتبة." }, correct: "ب" },
-    { scenario: "كيف يتم ترتيب الكلمات والخطابات الرسمية على المسرح (المنصة)؟", options: { "أ": "أ) تبدأ بالشخص الأعلى رتبة وتنتهي بالأقل رتبة.", "ب": "ب) تتحدث الشخصيات عشوائياً.", "ج": "ج) تبدأ دائماً بالشخص الأقل رتبة وتتصاعد حتى يتحدث الشخص الأعلى رتبة في النهاية.", "د": "د) كلمة واحدة فقط لرئيس الحفل." }, correct: "ج" },
-    { scenario: "أين يوضع الميكروفون عادةً عند تنسيق المنصة (Podium)؟", options: { "أ": "أ) في منتصف المسرح تماماً.", "ب": "ب) في يسار المسرح من وجهة نظر الجمهور.", "ج": "ج) في يمين المسرح (شمال من وجهة نظر الجمهور).", "د": "د) خارج المنصة." }, correct: "ج" },
-    { scenario: "في قواعد الجلوس والوقوف الرسمية (قاعدة المنتصف)، أين تجلس الشخصية ذات الرتبة الأولى (الأعلى رتبة)؟", options: { "أ": "أ) على أقصى اليمين.", "ب": "ب) على أقصى اليسار.", "ج": "ج) خلف الحضور.", "د": "د) في المنتصف تماماً، وتكون الرتبة الثانية على يمينها والرتبة الثالثة على يسارها." }, correct: "د" },
-    { scenario: "ما هو الإتيكيت الخاص بتجهيز زجاجة المياه على المنصة؟", options: { "أ": "أ) أن تكون زجاجة مغلقة ومكتوب عليها السعر.", "ب": "ب) أن تكون زجاجة مياه (بدون ليبل تجاري إن أمكن) ومعها كوب زجاجي نظيف جاهزين دائماً.", "ج": "ج) منع وضع المياه على المنصة نهائياً.", "د": "د) وضع مشروبات ساخنة بدلاً من المياه." }, correct: "ب" },
-    { scenario: "ما هي الخطوات المتبعة عند التعامل مع ضيوف الـ (VIPs) عند باب القاعة؟", options: { "أ": "أ) تجاهلهم حتى يدخلوا بمفردهم.", "ب": "ب) التعرف على الـ (VIP)، الترحيب بهم بأسلوب لائق، وتسليمهم مباشرة إلى مسؤول العلاقات العامة (PR).", "ج": "ج) طلب التذاكر منهم.", "د": "د) إيقافهم خارج الأبواب لحين امتلاء القاعة." }, correct: "ب" },
-    { scenario: "أي من العبارات التالية يمثل قاعدة صحيحة في التواصل الفعال (Communication Etiquette)؟", options: { "أ": "أ) مقاطعة المتحدث لإثبات وجهة نظرك بسرعة.", "ب": "ب) السخرية من الشخص الآخر لكسر الجليد.", "ج": "ج) التحدث بنبرة هادئة وواثقة، وعدم مقاطعة المتحدث مع إظهار الاهتمام أثناء الاستماع.", "د": "د) المزاح دائماً في كل الأوقات." }, correct: "ج" },
-    { scenario: "ما هي إحدى خطوات التنسيق المشترك بين اللجان (Cross-Committee Coordination) أثناء الفعالية؟", options: { "أ": "أ) العشوائية في تنفيذ المهام.", "ب": "ب) تجنب التواصل نهائياً بين اللجان.", "ج": "ج) تحديد الأدوار، ونقطة التسليم والتسلم، والتواصل الصامت واللاسلكي، وإدارة الأزمات المشتركة.", "د": "د) الاعتماد على الفردية في اتخاذ القرار." }, correct: "ج" }
+
+const questions = [
+  {
+    q: "ما هو الفرق الأساسي بين الإتيكيت والبروتوكول من حيث الإلزام؟",
+    a: [
+      "الإتيكيت إلزامي والبروتوكول اختياري.",
+      "الإتيكيت قواعد السلوك والالتزام بها إلزامي، والبروتوكول مواقف ومخالفتها لا يترتب عليها ضرر.",
+      "الإتيكيت قواعد التعامل في المواقف الرسمية واتباعها مفضل ومخالفتها لا يترتب عليها ضرر، بينما البروتوكول قواعد السلوك واللباقة والالتزام به إلزامي.",
+      "كلاهما غير ملزم على الإطلاق."
+    ],
+    correct: 2
+  },
+  {
+    q: "أي مما يلي يُعتبر من لغة الجسد السلبية أثناء التعامل الرسمي؟",
+    a: [
+      "الوقوف بشكل مستقيم.",
+      "الحفاظ على تواصل بصري سليم.",
+      "تشبيك الذراعين بشكل دفاعي.",
+      "ابتسامة وتعبير وجه هادئ."
+    ],
+    correct: 2
+  },
+  {
+    q: "ما هي القاعدة الذهبية في التقديم والتعريف بالشخصيات؟",
+    a: [
+      "تقديم الأعلى رتبة إلى الأقل رتبة.",
+      "تقديم الأقل رتبة إلى الأعلى رتبة.",
+      "لا توجد قاعدة محددة للتقديم.",
+      "التقديم حسب العمر بغض النظر عن الرتبة."
+    ],
+    correct: 1
+  },
+  {
+    q: "كيف يتم ترتيب الكلمات والخطابات الرسمية على المنصة؟",
+    a: [
+      "تبدأ بالأعلى رتبة وتنتهي بالأقل رتبة.",
+      "تتحدث الشخصيات عشوائياً.",
+      "تبدأ بالأقل رتبة وتنتهي بالأعلى رتبة VIP.",
+      "كلمة واحدة فقط لرئيس الحفل."
+    ],
+    correct: 2
+  },
+  {
+    q: "أين يوضع الميكروفون عادةً عند تنسيق المنصة؟",
+    a: [
+      "في منتصف المسرح تماماً.",
+      "في يسار المسرح من وجهة نظر الجمهور.",
+      "في يمين المسرح، أي شمال من وجهة نظر الجمهور.",
+      "خارج المنصة."
+    ],
+    correct: 2
+  },
+  {
+    q: "أين تجلس الشخصية ذات الرتبة الأولى حسب قاعدة المنتصف؟",
+    a: [
+      "على أقصى اليمين.",
+      "على أقصى اليسار.",
+      "خلف الحضور.",
+      "في المنتصف، والثانية على يمينها والثالثة على يسارها."
+    ],
+    correct: 3
+  },
+  {
+    q: "ما هو الإتيكيت الخاص بتجهيز زجاجة المياه على المنصة؟",
+    a: [
+      "زجاجة مغلقة ومكتوب عليها السعر.",
+      "مياه بدون ليبل تجاري إن أمكن، ومعها كوب زجاجي نظيف.",
+      "منع المياه على المنصة نهائياً.",
+      "مشروبات ساخنة بدلاً من المياه."
+    ],
+    correct: 1
+  },
+  {
+    q: "ما خطوات التعامل مع ضيوف VIP عند باب القاعة؟",
+    a: [
+      "تجاهلهم حتى يدخلوا بمفردهم.",
+      "التعرف عليهم والترحيب بهم وتسليمهم لمسؤول العلاقات العامة PR.",
+      "طلب التذاكر منهم.",
+      "إيقافهم خارج الأبواب حتى تمتلئ القاعة."
+    ],
+    correct: 1
+  },
+  {
+    q: "أي عبارة تمثل قاعدة صحيحة في التواصل الفعال؟",
+    a: [
+      "مقاطعة المتحدث لإثبات وجهة نظرك.",
+      "السخرية لكسر الجليد.",
+      "التحدث بهدوء وثقة والاستماع دون مقاطعة.",
+      "المزاح دائماً في كل الأوقات."
+    ],
+    correct: 2
+  },
+  {
+    q: "ما إحدى خطوات التنسيق المشترك بين اللجان أثناء الفعالية؟",
+    a: [
+      "العشوائية في تنفيذ المهام.",
+      "تجنب التواصل بين اللجان.",
+      "تحديد الأدوار والتسليم والتسلم والتواصل وإدارة الأزمات المشتركة.",
+      "الاعتماد على الفردية في اتخاذ القرار."
+    ],
+    correct: 2
+  }
 ];
 
-let currentStage = 0;
+const outcomes = [
+  {
+    min: 9, max: 10,
+    code: "109584756",
+    title: "OR LEGEND",
+    message: "يا OR يا جامد إنت 😂🔥\n\nطب ما تيجي إنت تمسك اللجنة بقى وإحنا نقعد نتفرج 😂🔥"
+  },
+  {
+    min: 7, max: 8,
+    code: "53685866",
+    title: "GREAT JOB",
+    message: "عاش 🧡🔥\nأنت على الطريق الصح، وكل خطوة بتقربك من الأفضل كمّل بنفس الحماس، ومستنيين منك إنجازات أكبر في اللي جاي 💪🏻✨"
+  },
+  {
+    min: 5, max: 6,
+    code: "268917",
+    title: "KEEP GOING",
+    message: "عاش 🧡👏🏻\nكل خطوة بتتعلم منها بتفرق، ودي لسه البداية! كمّل بنفس الروح، وثق في نفسك، والـ 10/10 المرة الجاية مش بعيدة عليك! 💪🏻"
+  },
+  {
+    min: 0, max: 4,
+    code: "8654",
+    title: "NEXT TIME",
+    message: "ولا يهمك 🧡✨\nكلنا بنتعلم بالتجربة، والمهم مش جبت كام المرة دي، المهم تطلع منها بحاجة جديدة وتكون أحسن المرة الجاية! يلا دي فرصتك تثبت لنفسك إنك تقدر 💪🏻🔥"
+  }
+];
+
+const STORAGE_KEY = "OR_ESCAPE_ROOM_ATTEMPT";
+
+const $ = id => document.getElementById(id);
+
+let playerName = "";
+let currentQuestion = 0;
 let score = 0;
-let secretCode = "";
+let answered = false;
+
+function showScreen(screenId) {
+  ["startScreen", "gameScreen", "resultScreen"].forEach(id => {
+    $(id).classList.toggle("hidden", id !== screenId);
+  });
+  window.scrollTo(0, 0);
+}
 
 function startGame() {
-    const playerName = document.getElementById('player-name').value;
-    if (playerName.trim() === "") {
-        alert("من فضلك اكتبي اسمكِ للبدء!");
-        return;
-    }
-    document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('game-screen').style.display = 'block';
-    loadStage();
+  playerName = $("playerName").value.trim();
+
+  if (!playerName) {
+    $("startError").textContent = "اكتب اسمك الأول.";
+    return;
+  }
+
+  if (localStorage.getItem(STORAGE_KEY)) {
+    $("startError").textContent =
+      "المحاولة اتستخدمت بالفعل على المتصفح ده.";
+    return;
+  }
+
+  // نسجل بدء المحاولة لمنع إعادة البدء على نفس المتصفح
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    name: playerName,
+    status: "started",
+    startedAt: new Date().toISOString()
+  }));
+
+  currentQuestion = 0;
+  score = 0;
+  showScreen("gameScreen");
+  renderQuestion();
 }
 
-function loadStage() {
-    if (currentStage < stages.length) {
-        const stage = stages[currentStage];
-        document.getElementById('scenario-text').innerText = stage.scenario;
-        
-        const feedbackElement = document.getElementById('feedback');
-        feedbackElement.innerText = '';
+function renderQuestion() {
+  answered = false;
 
-        const buttons = document.querySelectorAll('#options-container .btn');
-        const optionsKeys = Object.keys(stage.options);
-        
-        buttons.forEach((button, index) => {
-            const key = optionsKeys[index];
-            button.innerText = stage.options[key];
-            button.disabled = false;
-        });
-    } else {
-        showSafeScreen();
-    }
+  const item = questions[currentQuestion];
+
+  $("questionCount").textContent =
+    `السؤال ${currentQuestion + 1} من ${questions.length}`;
+
+  $("score").textContent = `السكور: ${score}/10`;
+  $("questionTitle").textContent = item.q;
+  $("progressBar").style.width =
+    `${currentQuestion / questions.length * 100}%`;
+
+  $("feedback").textContent = "";
+  $("nextBtn").disabled = true;
+  $("nextBtn").textContent =
+    currentQuestion === questions.length - 1
+      ? "عرض النتيجة ✓"
+      : "السؤال التالي ←";
+
+  $("answers").innerHTML = "";
+
+  item.a.forEach((answer, index) => {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent =
+      `${String.fromCharCode(65 + index)}. ${answer}`;
+
+    button.addEventListener("click", () => chooseAnswer(index));
+    $("answers").appendChild(button);
+  });
 }
 
-function checkAnswer(selectedKey) {
-    const stage = stages[currentStage];
-    const feedbackElement = document.getElementById('feedback');
-    const buttons = document.querySelectorAll('#options-container .btn');
+function chooseAnswer(selected) {
+  if (answered) return;
+  answered = true;
 
-    buttons.forEach(btn => btn.disabled = true);
+  const correct = questions[currentQuestion].correct;
+  const buttons = $("answers").querySelectorAll("button");
 
-    if (selectedKey === stage.correct) {
-        score += 1;
-        feedbackElement.style.color = '#10b981';
-        feedbackElement.innerText = "إجابة صحيحة!";
-    } else {
-        feedbackElement.style.color = '#ef4444';
-        feedbackElement.innerText = "إجابة خاطئة!";
-    }
+  buttons.forEach(button => button.disabled = true);
 
-    setTimeout(() => {
-        currentStage++;
-        if (currentStage < stages.length) {
-            loadStage();
-        } else {
-            showSafeScreen();
-        }
-    }, 1200);
+  if (selected === correct) {
+    score++;
+    buttons[selected].classList.add("correct");
+    $("feedback").textContent = "إجابة صحيحة! عاش 🧡";
+  } else {
+    buttons[selected].classList.add("wrong");
+    buttons[correct].classList.add("correct");
+    $("feedback").textContent = "الإجابة مش صحيحة، كمّل 💪🏻";
+  }
+
+  $("score").textContent = `السكور: ${score}/10`;
+  $("progressBar").style.width =
+    `${(currentQuestion + 1) / questions.length * 100}%`;
+
+  $("nextBtn").disabled = false;
 }
 
-function generateCode(length) {
-    if (length === 0) return "0";
-    let code = "";
-    for (let i = 0; i < length; i++) {
-        code += Math.floor(Math.random() * 10);
-    }
-    return code;
+function nextQuestion() {
+  if (!answered) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    finishGame();
+  }
 }
 
-function showSafeScreen() {
-    document.getElementById('game-screen').style.display = 'none';
-    document.getElementById('safe-screen').style.display = 'block';
+function finishGame() {
+  const outcome = outcomes.find(
+    item => score >= item.min && score <= item.max
+  );
 
-    secretCode = generateCode(score);
-    document.getElementById('generated-code').innerText = secretCode;
-    document.getElementById('final-score-text').innerText = `حصلتِ على ${score} من 10`;
+  $("resultTitle").textContent = outcome.title;
+  $("finalScore").textContent = `${score} / 10`;
+  $("resultMessage").textContent = outcome.message;
+  $("secretCode").textContent = outcome.code;
+  $("copyFeedback").textContent = "";
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    name: playerName,
+    status: "completed",
+    score,
+    code: outcome.code,
+    completedAt: new Date().toISOString()
+  }));
+
+  showScreen("resultScreen");
 }
 
-function verifyCode() {
-    const enteredCode = document.getElementById('code-input').value;
-    const codeFeedback = document.getElementById('code-feedback');
+$("startBtn").addEventListener("click", startGame);
+$("nextBtn").addEventListener("click", nextQuestion);
 
-    if (enteredCode.trim() === secretCode) {
-        document.getElementById('safe-screen').style.display = 'none';
-        document.getElementById('message-screen').style.display = 'block';
-        showMessage();
-    } else {
-        codeFeedback.style.color = '#ef4444';
-        codeFeedback.innerText = "الكود غير صحيح، تأكدي من إدخاله بدقة.";
-    }
-}
+$("playerName").addEventListener("keydown", event => {
+  if (event.key === "Enter") startGame();
+});
 
-function showMessage() {
-    const messageTitle = document.getElementById('message-title');
-    const finalMessageText = document.getElementById('final-message-text');
+$("copyBtn").addEventListener("click", async () => {
+  const code = $("secretCode").textContent;
 
-    if (score === 10) {
-        messageTitle.innerText = "أداء أسطوري واحترافي!";
-        finalMessageText.innerText = "مبروك! لقد حصلتِ على العلامة الكاملة 10/10 وأثبتّ أنكِ خبيرة إتيكيت وبروتوكول من الطراز الأول واستحققتِ فتح الخزنة بجدارة!";
-    } else if (score >= 7) {
-        messageTitle.innerText = "عمل ممتاز!";
-        finalMessageText.innerText = "نتيجة رائعة جداً! لديكِ معرفة ممتازة بقواعد الإتيكيت والبروتوكول.";
-    } else if (score >= 5) {
-        messageTitle.innerText = "محاولة جيدة!";
-        finalMessageText.innerText = "نجحتِ في الحصول على كود الخزنة وفتحها، ويمكنكِ دائماً تطوير مهاراتكِ أكثر.";
-    } else {
-        messageTitle.innerText = "محاولة تحتاج للتطوير";
-        finalMessageText.innerText = "الكود كان قصيراً هذه المرة، ننصحكِ بمراجعة قواعد الإتيكيت والبروتوكول مجدداً.";
-    }
-}
+  try {
+    await navigator.clipboard.writeText(code);
+    $("copyFeedback").textContent = "تم نسخ الكود 🧡";
+  } catch {
+    $("copyFeedback").textContent =
+      `انسخ الكود يدويًا: ${code}`;
+  }
+});
+
+// منع محاولة جديدة على نفس المتصفح
+(function checkPreviousAttempt() {
+  if (localStorage.getItem(STORAGE_KEY)) {
+    $("startBtn").disabled = true;
+    $("startError").textContent =
+      "فيه محاولة مسجلة بالفعل على الجهاز ده.";
+  }
+})();
