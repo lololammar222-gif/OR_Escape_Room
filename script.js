@@ -285,6 +285,109 @@ function getResult(correctAnswers) {
   };
 }
 
+function setupUnlock(result) {
+  const code = result.code;
+  const secretCode = $("secretCode");
+  const copyButton = $("copyCodeBtn");
+
+  // تقسيم الكود إلى أجزاء يجمعها اللاعب
+  const parts = code.match(/.{1,3}/g) || [];
+
+  secretCode.textContent = parts.join("  +  ");
+  copyButton.classList.add("hidden");
+
+  let box = $("unlockBox");
+
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "unlockBox";
+
+    box.style.cssText = `
+      margin: 24px auto;
+      padding: 20px;
+      max-width: 420px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid #ff9d32;
+      border-radius: 16px;
+      text-align: center;
+      direction: rtl;
+    `;
+
+    const title = document.createElement("h3");
+    title.textContent = "🔐 اجمع أجزاء الكود وافتح القفل";
+
+    const hint = document.createElement("p");
+    hint.textContent = "رتّب الأرقام واكتب الكود كامل في الخانة";
+
+    const input = document.createElement("input");
+    input.id = "unlockInput";
+    input.type = "text";
+    input.inputMode = "numeric";
+    input.autocomplete = "off";
+    input.placeholder = "اكتب الكود هنا...";
+    input.maxLength = code.length;
+
+    input.style.cssText = `
+      width: 90%;
+      max-width: 300px;
+      padding: 13px;
+      margin: 12px 0;
+      border-radius: 10px;
+      border: 1px solid #ff9d32;
+      background: #111a2d;
+      color: white;
+      text-align: center;
+      font-size: 20px;
+      letter-spacing: 2px;
+      box-sizing: border-box;
+    `;
+
+    const button = document.createElement("button");
+    button.id = "unlockBtn";
+    button.textContent = "UNLOCK 🔓";
+    button.className = "answer-btn";
+
+    const status = document.createElement("p");
+    status.id = "unlockStatus";
+    status.setAttribute("role", "status");
+
+    button.addEventListener("click", () => {
+      if (input.value.trim() === code) {
+        status.textContent = "تم فتح القفل بنجاح! 🎉🔓";
+        status.style.color = "#4ade80";
+        input.disabled = true;
+        button.disabled = true;
+
+        $("resultMessage").textContent = result.message;
+        $("resultMessage").classList.add("good");
+      } else {
+        status.textContent = "الكود مش مظبوط، جرّب تاني 💪🏻";
+        status.style.color = "#ff6b6b";
+        input.focus();
+      }
+    });
+
+    input.addEventListener("keydown", event => {
+      if (event.key === "Enter") {
+        button.click();
+      }
+    });
+
+    box.append(title, hint, input, button, status);
+    screens.result.appendChild(box);
+  }
+
+  $("unlockInput").value = "";
+  $("unlockInput").disabled = false;
+  $("unlockBtn").disabled = false;
+  $("unlockStatus").textContent = "";
+  $("resultMessage").textContent =
+    "جمّع أجزاء الكود واكتبها صح عشان تفتح القفل وتعرف رسالتك النهائية! 🔐";
+  $("resultMessage").classList.remove("good");
+
+  box.classList.remove("hidden");
+}
+
 function finishGame(timeUp = false) {
   if (gameEnded) return;
 
@@ -305,14 +408,9 @@ function finishGame(timeUp = false) {
   $("resultIcon").textContent =
     timeUp ? "⏰" : correctAnswers >= 7 ? "🏆" : "🔐";
 
-  $("resultMessage").textContent =
-    timeUp
-      ? "الوقت خلص! دي نتيجتك الحالية. حاول تاني وحقق نتيجة أفضل."
-      : result.message;
-
-  $("secretCode").textContent = result.code;
   $("progressBar").style.width = "100%";
 
+  setupUnlock(result);
   showScreen(screens.result);
 }
 
@@ -343,6 +441,10 @@ async function copyCode() {
 function restartGame() {
   clearInterval(timerInterval);
   $("playerName").value = "";
+
+  $("unlockBox")?.classList.add("hidden");
+  $("copyCodeBtn").classList.remove("hidden");
+
   showScreen(screens.start);
 }
 
