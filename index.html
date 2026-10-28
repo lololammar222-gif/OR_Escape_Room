@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الـ Escape Room - الإتيكيت والبروتوكول</title>
+    <title>لعبة الإتيكيت والبروتوكول</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,59 +11,44 @@
     <!-- شاشة البداية -->
     <div class="game-container" id="start-screen">
         <div class="character-box">
-            <img src="character.png" alt="شخصية YLY" class="character-img">
+            <img src="character.png" alt="الشخصية" class="character-img">
         </div>
-        <h1>مرحباً بكِ في تحدي الـ Escape Room!</h1>
-        <p>ادخلي اسمك واجمعي أرقام الكود للهروب من الغرفة:</p>
-        <input type="text" id="player-name" placeholder="اكتبي اسمك هنا...">
-        <button class="btn main-btn" onclick="startGame()">ابدأ المغامرة 🚀</button>
+        <h1>مرحباً بكِ في لعبة الإتيكيت والبروتوكول</h1>
+        <p>الرجاء إدخال اسمكِ للبدء:</p>
+        <input type="text" id="player-name" placeholder="اكتبي اسمكِ هنا...">
+        <button class="btn" onclick="startGame()">بدء اللعبة</button>
     </div>
 
-    <!-- شاشة اللعبة -->
+    <!-- شاشة الأسئلة -->
     <div class="game-container" id="game-screen" style="display: none;">
-        
-        <!-- شريط التقدم العلوي -->
-        <div class="progress-header">
-            <span id="stage-counter">المحطة 1 من 10</span>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progress-fill"></div>
-            </div>
+        <div class="character-small-box">
+            <img src="character.png" alt="الشخصية" class="character-small-img">
         </div>
-
-        <div class="character-box">
-            <img src="character.png" alt="شخصية YLY" class="character-img">
-        </div>
-
-        <h2 id="room-title"></h2>
         <p id="scenario-text"></p>
-
         <div class="options-container" id="options-container">
-            <button class="btn opt-btn" onclick="checkAnswer('أ')">أ</button>
-            <button class="btn opt-btn" onclick="checkAnswer('ب')">ب</button>
-            <button class="btn opt-btn" onclick="checkAnswer('ج')">ج</button>
-            <button class="btn opt-btn" onclick="checkAnswer('د')">د</button>
+            <button class="btn" onclick="checkAnswer('أ')">أ</button>
+            <button class="btn" onclick="checkAnswer('ب')">ب</button>
+            <button class="btn" onclick="checkAnswer('ج')">ج</button>
+            <button class="btn" onclick="checkAnswer('د')">د</button>
         </div>
-
         <div id="feedback" class="feedback"></div>
     </div>
 
-    <!-- شاشة الخزنة والنتيجة النهائية -->
+    <!-- شاشة الخزنة والنتيجة -->
     <div class="game-container" id="safe-screen" style="display: none;">
-        <div class="character-box">
-            <img src="character.png" alt="شخصية YLY" class="character-img">
-        </div>
-        
-        <h2 id="safe-title">فتحتِ الخزنة!</h2>
-        
-        <div class="safe-box">
-            <p>الكود الخاص بكِ للهروب هو:</p>
-            <div class="secret-code" id="generated-code">--------</div>
-        </div>
+        <h2>النتيجة النهائية</h2>
+        <p id="final-score-text"></p>
+        <p>الكود الخاص بكِ هو:<br><strong id="generated-code" class="secret-code"></strong></p>
+        <p>أدخلي الكود في الخانة أدناه لفتح الرسالة:</p>
+        <input type="text" id="code-input" placeholder="أدخلي الكود هنا...">
+        <button class="btn" onclick="verifyCode()">فتح الرسالة</button>
+        <div id="code-feedback" class="feedback"></div>
+    </div>
 
-        <p class="final-score" id="final-score-text"></p>
-        <p class="final-message" id="final-message-text"></p>
-
-        <button class="btn main-btn" onclick="location.reload()">إعادة اللعب 🔄</button>
+    <!-- شاشة الرسالة النهائية -->
+    <div class="game-container" id="message-screen" style="display: none;">
+        <h2 id="message-title"></h2>
+        <p id="final-message-text"></p>
     </div>
 
     <script src="script.js"></script>
