@@ -11,11 +11,11 @@
     <!-- شاشة البداية -->
     <div class="game-container" id="start-screen">
         <div class="character-box">
-            <span class="avatar">🕵️‍♂️</span>
+            <img src="character.png" alt="شخصية YLY" class="character-img">
         </div>
-        <h1>مرحباً بك في تحدي الـ Escape Room!</h1>
-        <p>ادخل اسمك واجمع أرقام الكود للهروب من الغرفة:</p>
-        <input type="text" id="player-name" placeholder="اكتب اسمك هنا...">
+        <h1>مرحباً بكِ في تحدي الـ Escape Room!</h1>
+        <p>ادخلي اسمك واجمعي أرقام الكود للهروب من الغرفة:</p>
+        <input type="text" id="player-name" placeholder="اكتبي اسمك هنا...">
         <button class="btn main-btn" onclick="startGame()">ابدأ المغامرة 🚀</button>
     </div>
 
@@ -31,17 +31,17 @@
         </div>
 
         <div class="character-box">
-            <span class="avatar" id="avatar-emoji">🧐</span>
+            <img src="character.png" alt="شخصية YLY" class="character-img">
         </div>
 
         <h2 id="room-title"></h2>
         <p id="scenario-text"></p>
 
         <div class="options-container" id="options-container">
-            <button class="btn opt-btn" data-key="أ"></button>
-            <button class="btn opt-btn" data-key="ب"></button>
-            <button class="btn opt-btn" data-key="ج"></button>
-            <button class="btn opt-btn" data-key="د"></button>
+            <button class="btn opt-btn" onclick="checkAnswer('أ')">أ</button>
+            <button class="btn opt-btn" onclick="checkAnswer('ب')">ب</button>
+            <button class="btn opt-btn" onclick="checkAnswer('ج')">ج</button>
+            <button class="btn opt-btn" onclick="checkAnswer('د')">د</button>
         </div>
 
         <div id="feedback" class="feedback"></div>
@@ -50,13 +50,13 @@
     <!-- شاشة الخزنة والنتيجة النهائية -->
     <div class="game-container" id="safe-screen" style="display: none;">
         <div class="character-box">
-            <span class="avatar" id="safe-avatar">🔓</span>
+            <img src="character.png" alt="شخصية YLY" class="character-img">
         </div>
         
-        <h2 id="safe-title">فتحت الخزنة!</h2>
+        <h2 id="safe-title">فتحتِ الخزنة!</h2>
         
         <div class="safe-box">
-            <p>الكود الخاص بك للهروب هو:</p>
+            <p>الكود الخاص بكِ للهروب هو:</p>
             <div class="secret-code" id="generated-code">--------</div>
         </div>
 
